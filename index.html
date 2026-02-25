@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="da">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,13 +32,13 @@
             width: 300px;
             height: 100vh;
             padding: 20px;
-            background: linear-gradient(90deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 100%);
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 100%);
             pointer-events: none;
             z-index: 100;
             overflow-y: auto;
         }
 
-        .ui-overlay > * {
+        .ui-overlay>* {
             pointer-events: auto;
         }
 
@@ -45,7 +46,7 @@
             text-align: center;
             font-size: 1.5em;
             margin-bottom: 15px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             color: #2c3e50;
         }
 
@@ -56,7 +57,7 @@
             border-radius: 15px;
             padding: 15px;
             border: 2px solid #e0e0e0;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         .input-group {
@@ -124,7 +125,7 @@
             border: 2px solid #e0e0e0;
             font-size: 0.95em;
             max-width: 350px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         .info-panel h3 {
@@ -149,7 +150,7 @@
             border-radius: 10px;
             border: 2px solid #e0e0e0;
             font-size: 0.9em;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         .controls-help h3 {
@@ -169,12 +170,12 @@
             transform: translate(-50%, -50%);
             font-size: 2em;
             text-align: center;
-            background: rgba(255,255,255,0.98);
+            background: rgba(255, 255, 255, 0.98);
             padding: 40px;
             border-radius: 20px;
             border: 3px solid #667eea;
             z-index: 1000;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
 
         .spinner {
@@ -188,8 +189,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .highlight {
@@ -208,7 +214,7 @@
             border-radius: 10px;
             border: 2px solid #e0e0e0;
             font-size: 0.9em;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         .speed-controls {
@@ -241,7 +247,7 @@
             border: 2px solid #e0e0e0;
             font-size: 0.85em;
             max-width: 200px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         .landmarks-panel h3 {
@@ -257,7 +263,7 @@
 
         .minimap {
             position: absolute;
-            top: 20px;
+            bottom: 20px;
             right: 20px;
             width: 250px;
             height: 250px;
@@ -265,7 +271,7 @@
             backdrop-filter: blur(10px);
             border-radius: 10px;
             border: 2px solid #667eea;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             z-index: 200;
         }
 
@@ -290,6 +296,7 @@
         }
     </style>
 </head>
+
 <body>
     <div id="canvas-container"></div>
 
@@ -301,6 +308,8 @@
                 <button onclick="visualize()">KUBE 🚀</button>
                 <button onclick="visualizeGumballs()">GUMBALLS 🍬</button>
                 <button onclick="visualizeFlat()">FLADE 📏</button>
+                <button onclick="toggleSticks()" id="sticksBtn" style="margin-top: 4px; background: #2c3e50;">PINDE
+                    🥢</button>
             </div>
             <div class="input-group" style="margin-top: 10px;">
                 <label style="padding: 12px; font-size: 1.1em; color: #333;">Banebredde (meter):</label>
@@ -339,20 +348,22 @@
         <h3>🗺️ Minimap - Træk elementerne!</h3>
         <canvas id="minimapCanvas" width="250" height="186"></canvas>
         <div style="display: flex; gap: 5px; padding: 5px; justify-content: center;">
-            <button onclick="zoomMinimap(-0.2)" style="padding: 5px 12px; font-size: 1em; cursor: pointer;">➖ Zoom ud</button>
-            <button onclick="zoomMinimap(0.2)" style="padding: 5px 12px; font-size: 1em; cursor: pointer;">➕ Zoom ind</button>
+            <button onclick="zoomMinimap(-0.2)" style="padding: 5px 12px; font-size: 1em; cursor: pointer;">➖ Zoom
+                ud</button>
+            <button onclick="zoomMinimap(0.2)" style="padding: 5px 12px; font-size: 1em; cursor: pointer;">➕ Zoom
+                ind</button>
         </div>
     </div>
 
     <div class="controls-help">
         <h3>🎮 Kontroller</h3>
         <p><strong>Bevægelse:</strong></p>
-        <p>⌨️ W - Op</p>
-        <p>⌨️ S - Ned</p>
+        <p>⌨️ W - Fremad</p>
+        <p>⌨️ S - Tilbage</p>
         <p>⌨️ A - Pan venstre</p>
         <p>⌨️ D - Pan højre</p>
-        <p>⌨️ ↑ - Fremad</p>
-        <p>⌨️ ↓ - Tilbage</p>
+        <p>⌨️ ↑ / R - Op</p>
+        <p>⌨️ ↓ / F - Ned</p>
         <p>⌨️ → - Rotér med uret</p>
         <p>⌨️ ← - Rotér mod uret</p>
         <p>🖱️ Klik - Aktivér mus-kontrol</p>
@@ -366,11 +377,22 @@
             <button class="speed-btn" onclick="setSpeed(200)">200</button>
             <button class="speed-btn" onclick="setSpeed(1000)">1000</button>
         </div>
-        <button style="margin-top: 10px; width: 100%; padding: 8px; font-size: 0.9em;" onclick="setHorizontalView()">↔️ Vandret visning</button>
-        <button style="margin-top: 5px; width: 100%; padding: 8px; font-size: 0.9em;" onclick="setGroundView()">👁️ Jordniveau (1.8m)</button>
-        <button style="margin-top: 5px; width: 100%; padding: 8px; font-size: 0.9em; background: #ff6b6b; color: white;" onclick="toggleStack()">📚 Stak</button>
+        <button style="margin-top: 10px; width: 100%; padding: 8px; font-size: 0.9em;" onclick="setHorizontalView()">↔️
+            Vandret visning</button>
+        <button style="margin-top: 5px; width: 100%; padding: 8px; font-size: 0.9em;" onclick="setGroundView()">👁️
+            Jordniveau (1.8m)</button>
+        <button style="margin-top: 5px; width: 100%; padding: 8px; font-size: 0.9em; background: #ff6b6b; color: white;"
+            onclick="toggleStack()">📚 Stak</button>
+        <div style="margin-top: 10px; display: flex; align-items: center; gap: 6px;">
+            <label style="font-size: 0.75em; color: #555; white-space: nowrap;">🔭 Draw-distance:</label>
+            <input type="number" id="drawDistanceInput" value="1000" min="10" max="100000" step="10"
+                style="flex:1; padding: 4px 6px; font-size: 0.8em; border: 1px solid #ccc; border-radius: 5px;"
+                onchange="setDrawDistance(this.value)" oninput="setDrawDistance(this.value)">
+            <span style="font-size: 0.7em; color: #888;">m</span>
+        </div>
         <div style="margin-top: 8px;">
-            <label style="font-size: 0.75em; color: #555; display: block; margin-bottom: 3px;">🗺️ Kort til stakken:</label>
+            <label style="font-size: 0.75em; color: #555; display: block; margin-bottom: 3px;">🗺️ Kort til
+                stakken:</label>
             <input type="file" id="mapFileInput" accept="image/*" onchange="loadMapImage(event)"
                 style="font-size: 0.7em; width: 100%; cursor: pointer;">
             <div style="display: flex; align-items: center; gap: 6px; margin-top: 5px;">
@@ -392,7 +414,8 @@
     </div>
 
     <!-- Reference models panel - right side -->
-    <div id="refPanel" style="position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.93); border-radius: 12px; padding: 14px 16px; z-index: 200; min-width: 200px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); border: 1px solid #ddd; font-size: 0.85em;">
+    <div id="refPanel"
+        style="position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.93); border-radius: 12px; padding: 14px 16px; z-index: 200; min-width: 200px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); border: 1px solid #ddd; font-size: 0.85em;">
         <div style="font-weight: bold; margin-bottom: 10px; font-size: 1em; color: #333;">📐 Referenceobjekter</div>
         <label style="display:flex; align-items:center; gap:8px; margin-bottom:7px; cursor:pointer;">
             <input type="checkbox" id="ref-titanic" onchange="toggleRef('titanic')" checked>
@@ -446,6 +469,7 @@
         let isAnimating = false; // Animation in progress
         let mapImageUrl = null; // URL to loaded map image
         let mapTilesVisible = false; // Whether map tiles along track are visible
+        let sticksMesh = null; // InstancedMesh for the sticks
 
         const keys = {
             up: false,
@@ -463,7 +487,7 @@
 
         function toggleRef(type) {
             const visible = document.getElementById('ref-' + type).checked;
-            scene.traverse(function(obj) {
+            scene.traverse(function (obj) {
                 if (obj.userData.refType === type) {
                     obj.visible = visible;
                 }
@@ -483,6 +507,14 @@
         function setSpeed(speed) {
             moveSpeed = speed;
             document.getElementById('speedValue').textContent = speed;
+        }
+
+        function setDrawDistance(value) {
+            const dist = Math.max(10, Number(value) || 200);
+            camera.far = dist;
+            camera.updateProjectionMatrix();
+            scene.fog.near = dist * 0.5;
+            scene.fog.far = dist;
         }
 
         function setHorizontalView() {
@@ -706,9 +738,9 @@
 
             scene = new THREE.Scene();
             scene.background = new THREE.Color(0xf5f5f5);
-            scene.fog = new THREE.Fog(0xe8e8e8, 100, 200);
+            scene.fog = new THREE.Fog(0xe8e8e8, 500, 1000);
 
-            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 200);
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             camera.position.set(-20, 50, 100);
 
             renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -887,10 +919,10 @@
                 const isDragging = draggingObject && draggingObject.type === 'redbox';
                 const size = isDragging ? 10 : 8;
                 ctx.fillStyle = isDragging ? '#ff6b6b' : '#ff0000';
-                ctx.fillRect(pos.x - size/2, pos.y - size/2, size, size);
+                ctx.fillRect(pos.x - size / 2, pos.y - size / 2, size, size);
                 ctx.strokeStyle = '#fff';
                 ctx.lineWidth = isDragging ? 3 : 2;
-                ctx.strokeRect(pos.x - size/2, pos.y - size/2, size, size);
+                ctx.strokeRect(pos.x - size / 2, pos.y - size / 2, size, size);
             }
 
             // Draw human figure
@@ -1135,26 +1167,30 @@
 
         function setupControls() {
             document.addEventListener('keydown', (e) => {
-                switch(e.code) {
-                    case 'KeyW': keys.up = true; break;
-                    case 'KeyS': keys.down = true; break;
+                switch (e.code) {
+                    case 'KeyW': keys.forward = true; break;
+                    case 'KeyS': keys.backward = true; break;
                     case 'KeyA': keys.panLeft = true; break;
                     case 'KeyD': keys.panRight = true; break;
-                    case 'ArrowUp': keys.forward = true; e.preventDefault(); break;
-                    case 'ArrowDown': keys.backward = true; e.preventDefault(); break;
+                    case 'KeyR': keys.up = true; break;
+                    case 'KeyF': keys.down = true; break;
+                    case 'ArrowUp': keys.up = true; e.preventDefault(); break;
+                    case 'ArrowDown': keys.down = true; e.preventDefault(); break;
                     case 'ArrowLeft': keys.rotateLeft = true; e.preventDefault(); break;
                     case 'ArrowRight': keys.rotateRight = true; e.preventDefault(); break;
                 }
             });
 
             document.addEventListener('keyup', (e) => {
-                switch(e.code) {
-                    case 'KeyW': keys.up = false; break;
-                    case 'KeyS': keys.down = false; break;
+                switch (e.code) {
+                    case 'KeyW': keys.forward = false; break;
+                    case 'KeyS': keys.backward = false; break;
                     case 'KeyA': keys.panLeft = false; break;
                     case 'KeyD': keys.panRight = false; break;
-                    case 'ArrowUp': keys.forward = false; break;
-                    case 'ArrowDown': keys.backward = false; break;
+                    case 'KeyR': keys.up = false; break;
+                    case 'KeyF': keys.down = false; break;
+                    case 'ArrowUp': keys.up = false; break;
+                    case 'ArrowDown': keys.down = false; break;
                     case 'ArrowLeft': keys.rotateLeft = false; break;
                     case 'ArrowRight': keys.rotateRight = false; break;
                 }
@@ -1596,7 +1632,7 @@
             const file = event.target.files[0];
             if (!file) return;
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 mapImageUrl = e.target.result;
                 // Always refresh the map overlay (flat or stacked)
                 if (currentVisualizationType === 'flat') {
@@ -1632,7 +1668,7 @@
             if (mapImageUrl) {
                 // Load from the user-selected file (data URL)
                 const loader = new THREE.TextureLoader();
-                loader.load(mapImageUrl, function(texture) {
+                loader.load(mapImageUrl, function (texture) {
                     const mapMaterial = new THREE.MeshStandardMaterial({
                         map: texture,
                         side: THREE.DoubleSide,
@@ -1700,12 +1736,12 @@
             const flatHeight = currentDimensions.flatHeight;
             const mapSize = parseFloat(document.getElementById('mapSizeInput').value) || 2120;
 
-            // Place tiles to the RIGHT of the track (x = flatHeight + mapSize/2)
-            const tileX = flatHeight + mapSize / 2;
+            const tileXRight = flatHeight + mapSize / 2;
+            const tileXLeft = -mapSize / 2;
             const numTiles = Math.ceil(flatWidth / mapSize);
 
             const loader = new THREE.TextureLoader();
-            loader.load(mapImageUrl, function(texture) {
+            loader.load(mapImageUrl, function (texture) {
                 for (let i = 0; i < numTiles; i++) {
                     const tileZ = i * mapSize + mapSize / 2;
                     const tileGeometry = new THREE.PlaneGeometry(mapSize, mapSize);
@@ -1713,13 +1749,23 @@
                         map: texture,
                         side: THREE.DoubleSide
                     });
-                    const tilePlane = new THREE.Mesh(tileGeometry, tileMaterial);
-                    tilePlane.rotation.x = -Math.PI / 2;
-                    tilePlane.position.set(tileX, -0.4, tileZ);
-                    tilePlane.userData.isMapTile = true;
-                    scene.add(tilePlane);
+
+                    // Right side
+                    const tileRight = new THREE.Mesh(tileGeometry, tileMaterial);
+                    tileRight.rotation.x = -Math.PI / 2;
+                    tileRight.position.set(tileXRight, -0.4, tileZ);
+                    tileRight.userData.isMapTile = true;
+                    scene.add(tileRight);
+
+                    // Left side
+                    const tileLeft = new THREE.Mesh(tileGeometry, tileMaterial.clone());
+                    tileLeft.rotation.x = -Math.PI / 2;
+                    tileLeft.position.set(tileXLeft, -0.4, tileZ);
+                    tileLeft.userData.isMapTile = true;
+                    scene.add(tileLeft);
                 }
-                createLabel(`🗺️ ${numTiles}× kort (${mapSize}m)`, tileX, 5, flatWidth / 2, 30);
+                createLabel(`🗺️ ${numTiles}× kort (${mapSize}m)`, tileXRight, 5, flatWidth / 2, 30);
+                createLabel(`🗺️ ${numTiles}× kort (${mapSize}m)`, tileXLeft, 5, flatWidth / 2, 30);
             });
         }
 
@@ -1764,11 +1810,21 @@
                     child.userData.isRedBox ||
                     child.userData.isHuman ||
                     child.userData.isFlat ||
+                    child.userData.isStick ||
                     child.type === 'Sprite') {
                     toRemove.push(child);
                 }
             });
             toRemove.forEach(obj => scene.remove(obj));
+
+            // Clean up sticksMesh
+            if (sticksMesh) {
+                sticksMesh.geometry.dispose();
+                sticksMesh.material.dispose();
+                sticksMesh = null;
+            }
+            const sticksBtnEl = document.getElementById('sticksBtn');
+            if (sticksBtnEl) sticksBtnEl.textContent = 'PINDE 🥢';
         }
 
         function visualize() {
@@ -1789,7 +1845,7 @@
             loading.style.display = 'block';
 
             // Calculate dimensions
-            const sideLength = Math.ceil(Math.pow(num, 1/3));
+            const sideLength = Math.ceil(Math.pow(num, 1 / 3));
             const gridCount = sideLength;
             currentDimensions.sideLength = sideLength;
 
@@ -1896,7 +1952,7 @@
 
             const lines = text.split('\n');
             lines.forEach((line, i) => {
-                context.fillText(line, canvas.width / 2, canvas.height / 2 + (i - lines.length/2 + 0.5) * 50);
+                context.fillText(line, canvas.width / 2, canvas.height / 2 + (i - lines.length / 2 + 0.5) * 50);
             });
 
             const texture = new THREE.CanvasTexture(canvas);
@@ -1949,7 +2005,7 @@
             const packingEfficiency = 0.64; // Random sphere packing
 
             // Calculate cylinder height needed
-            const gumballVolume = (4/3) * Math.PI * Math.pow(gumballRadius, 3);
+            const gumballVolume = (4 / 3) * Math.PI * Math.pow(gumballRadius, 3);
             const cylinderCrossSection = Math.PI * Math.pow(cylinderRadius, 2);
             const gumballsPerMeter = (cylinderCrossSection * packingEfficiency) / gumballVolume;
             const cylinderHeight = num / gumballsPerMeter;
@@ -2299,6 +2355,65 @@
             return texture;
         }
 
+        function toggleSticks() {
+            if (currentVisualizationType !== 'flat') {
+                alert('Pinde kan kun tilføjes i Flade-visning! Tryk på FLADE 📏 først.');
+                return;
+            }
+
+            const btn = document.getElementById('sticksBtn');
+
+            if (sticksMesh) {
+                // Remove existing sticks
+                scene.remove(sticksMesh);
+                sticksMesh.geometry.dispose();
+                sticksMesh.material.dispose();
+                sticksMesh = null;
+                if (btn) btn.textContent = 'PINDE 🥢';
+                return;
+            }
+
+            // Create sticks Using InstancedMesh for performance
+            const flatWidth = currentDimensions.flatWidth; // Z axis length
+            const flatHeight = currentDimensions.flatHeight; // X axis length
+            const numSticks = flatWidth * flatHeight;
+
+            if (numSticks > 2000000) {
+                if (!confirm(`Du er ved at oprette ${numSticks.toLocaleString('da-DK')} pinde. Det kan tage et kort øjeblik. Vil du fortsætte?`)) {
+                    return;
+                }
+            }
+
+            const loading = document.getElementById('loading');
+            if (loading) loading.style.display = 'block';
+
+            // Use setTimeout to allow UI to update loading screen before heavy computation
+            setTimeout(() => {
+                const stickGeometry = new THREE.CylinderGeometry(0.05, 0.05, 2, 8);
+                const stickMaterial = new THREE.MeshStandardMaterial({ color: 0x000000 }); // Black sticks
+
+                sticksMesh = new THREE.InstancedMesh(stickGeometry, stickMaterial, numSticks);
+                sticksMesh.userData.isStick = true;
+
+                const matrix = new THREE.Matrix4();
+                let i = 0;
+
+                for (let z = 0; z < flatWidth; z++) {
+                    for (let x = 0; x < flatHeight; x++) {
+                        // Position in middle of each 1x1 field. Height is 2 -> Center is at Y=1.
+                        matrix.setPosition(x + 0.5, 1.0, z + 0.5);
+                        sticksMesh.setMatrixAt(i++, matrix);
+                    }
+                }
+
+                sticksMesh.instanceMatrix.needsUpdate = true;
+                scene.add(sticksMesh);
+
+                if (btn) btn.textContent = 'FJERN PINDE 🥢';
+                if (loading) loading.style.display = 'none';
+            }, 50);
+        }
+
         function updateFlatInfoPanel(num, flatWidth, flatHeight) {
             const panel = document.getElementById('infoPanel');
             panel.innerHTML = `
@@ -2315,4 +2430,5 @@
         window.addEventListener('load', init);
     </script>
 </body>
+
 </html>
